@@ -1,8 +1,6 @@
 #    WVD Script Parameters   #
 ##############################
 Param (
-    [parameter]
-        [string]$redirxml,
     [Parameter(Mandatory=$true)]
         [string]$RegistrationToken,
         [string]$ProfilePath, 
@@ -135,7 +133,7 @@ Set-ItemProperty `
 New-ItemProperty `
     -Path HKLM:\Software\FSLogix\Profiles `
     -Name "VHDLocations" `
-    -Value "$ProfilePath" `
+    -Value "$ProfilePath\Profiles" `
     -PropertyType MultiString `
     -Force
 Set-ItemProperty `
@@ -182,7 +180,7 @@ New-ItemProperty `
 New-ItemProperty `
     -Path HKLM:\Software\FSLogix\Profiles `
     -Name "RedirXMLSourceFolder" `
-    -Value $redirxml `
+    -Value "$profilepath\FSLogixRules" `
     -PropertyType REG_SZ `
     -Force
 Pop-Location
