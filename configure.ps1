@@ -189,7 +189,7 @@ Add-LocalGroupMember -Group "FSLogix Profile Exclude List" -member $localadmin -
 ##############################
 #    Enable Azure AD Join    #
 ##############################
-if ($aadjoin){
+/*if ($aadjoin){
 Add-Content -LiteralPath C:\New-WVDSessionHost.log "Enable Azure AD Join"
 Push-Location 
 Set-Location HKLM:\SOFTWARE\Microsoft
@@ -202,7 +202,7 @@ New-Item `
     -Name AADJPrivate `
     -Force
 Pop-Location
-}
+}*/
 
 #    Restart Computer    #
 Add-Content -LiteralPath C:\New-WVDSessionHost.log "Process Complete - REBOOT"
