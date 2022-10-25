@@ -6,7 +6,8 @@ Param (
     [Parameter(Mandatory=$true)]
         [string]$RegistrationToken,
         [string]$ProfilePath, 
-        [string]$aadjoin          
+        [string]$aadjoin,
+        [string]$localadmin          
 )
 
 #    WVD Variables   #
@@ -81,7 +82,7 @@ Write-Output "Installing RDAgentBootLoader on VM Complete. Exit code=$sts`n"
 Wait-Event -Timeout 5
 Add-Content -LiteralPath C:\New-WVDSessionHost.log "Installing WVD Agent"
 Write-Output "Installing RD Infra Agent on VM $AgentInstaller`n"
-#$agent_deploy_status = Start-Process `
+$agent_deploy_status = Start-Process `
     -FilePath "msiexec.exe" `
     -ArgumentList "/i $LocalWVDpath$WVDAgentInstaller", `
         "/quiet", `
@@ -185,7 +186,7 @@ New-ItemProperty `
     -PropertyType REG_SZ `
     -Force
 Pop-Location
-
+Add-LocalGroupMember -Group "FSLogix Profile Exclude List" -member $localadmin -verbose
 
 ##############################
 #    Enable Azure AD Join    #
