@@ -119,8 +119,8 @@ New-Item `
     -Path HKLM:\Software\FSLogix\Profiles\ `
     -Name Apps `
     -Force
-New-ItemProperty `
-    -path KLM:\Software\FSLogix\Apps `
+Set-ItemProperty `
+    -path HKLM:\Software\FSLogix\Apps `
     -name "CleanupInvalidSessions" `
     -type "Dword" `
     -value "1" `
@@ -130,11 +130,11 @@ Set-ItemProperty `
     -Name "Enabled" `
     -Type "Dword" `
     -Value "1"
-New-ItemProperty `
+Set-ItemProperty `
     -Path HKLM:\Software\FSLogix\Profiles `
     -Name "VHDLocations" `
     -Value "$ProfilePath\Profiles" `
-    -PropertyType MultiString `
+    -Type MultiString `
     -Force
 Set-ItemProperty `
     -Path HKLM:\Software\FSLogix\Profiles `
@@ -168,7 +168,7 @@ Set-ItemProperty `
     -Value "%username%%sid%"
 Set-ItemProperty `
     -Path HKLM:\Software\FSLogix\Profiles `
-    -Name DeleteLocalProfileWhenVHDShouldApply `
+    -Name "DeleteLocalProfileWhenVHDShouldApply" `
     -Type DWord `
     -Value 1
 New-ItemProperty `
@@ -177,11 +177,11 @@ New-ItemProperty `
     -Value "1" `
     -PropertyType "DWORD" `
     -Force
-New-ItemProperty `
+Set-ItemProperty `
     -Path HKLM:\Software\FSLogix\Profiles `
     -Name "RedirXMLSourceFolder" `
     -Value "$profilepath\FSLogixRules" `
-    -PropertyType REG_SZ `
+    -Type string `
     -Force
 Pop-Location
 Add-LocalGroupMember -Group "FSLogix Profile Exclude List" -member $localadmin -verbose
